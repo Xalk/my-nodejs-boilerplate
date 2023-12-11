@@ -23,6 +23,17 @@
     "import/no-import-module-exports": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "import/extensions": "off",
+    "no-plusplus": "warn",
+    "no-await-in-loop": "warn",
+    "no-case-declarations": "off",
+    "no-nested-ternary": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

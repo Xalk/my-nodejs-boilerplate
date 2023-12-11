@@ -2,12 +2,14 @@ import express from 'express';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
+import passport from 'passport';
 import config from './config/config';
 import { authLimiter } from './middlewares/rateLimiter';
 import routes from './routes/v1';
 import globalErrorHandler from './middlewares/error';
 import { AppError } from './utils/AppError';
 import { httpStatus } from './utils/enums';
+import jwtStrategy from './strategies/jwtStrategy.js';
 
 const app = express();
 
@@ -24,8 +26,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
+app.use(
+  cors({
+    origin: [config.cors.devOrigin, config.cors.prodOrigin],
+    credentials: true,
+  }),
+);
+
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
 
 // limit repeated failed requests to auth endpoints
 if (config.env === 'production') {

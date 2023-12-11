@@ -1,10 +1,10 @@
-import { httpStatus, resStatus } from '../utils/enums';
-import { AppError } from '../utils/AppError';
-import config from '../config/config';
+import { httpStatus, resStatus } from '../utils/enums.js';
+import { AppError } from '../utils/AppError.js';
+import config from '../config/config.js';
 
 const handleJWTError = () => new AppError('Invalid token. Please login again.', httpStatus.UNAUTHORIZED);
 
-const handleJWTExpiredError = () => new AppError('Expired session. Please login a gain.', httpStatus.UNAUTHORIZED);
+const handleJWTExpiredError = () => new AppError('Expired session. Please login again.', httpStatus.UNAUTHORIZED);
 
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}`;
